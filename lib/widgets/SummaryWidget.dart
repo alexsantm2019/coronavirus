@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:global_coronavirus_info/models/summary.dart';
 import 'package:global_coronavirus_info/services/services.dart';
 import 'package:global_coronavirus_info/widgets/SummaryCardWidget.dart';
+import 'package:intl/intl.dart';
 
 class SummaryWidget extends StatefulWidget {
   @override
@@ -21,48 +22,88 @@ class _SummaryWidget extends State<SummaryWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(1.0),
       child: Container(
-        color: Colors.blue[200],
-        //child: Text("holaaaaa"),
+        //color: Colors.white,
+        color: Colors.blue[100],
         child: FutureBuilder<Summary>(
             future: _summaryList,
             builder: (context, AsyncSnapshot<Summary> snapshot) {
               if (snapshot.hasData) {
-                var newConfirmed = snapshot.data?.newConfirmed;
-                var totalConfirmed = snapshot.data?.totalConfirmed;
-                var newDeaths = snapshot.data?.newDeaths;
-                var totalDeaths = snapshot.data?.totalDeaths;
-                var newRecovered = snapshot.data?.newRecovered;
-                var totalRecovered = snapshot.data?.totalRecovered;
+                var newConfirmed = new NumberFormat("#,###")
+                    .format(snapshot.data?.newConfirmed);
+                var totalConfirmed = new NumberFormat("#,###")
+                    .format(snapshot.data?.totalConfirmed);
+                var newDeaths =
+                    new NumberFormat("#,###").format(snapshot.data?.newDeaths);
+                var totalDeaths = new NumberFormat("#,###")
+                    .format(snapshot.data?.totalDeaths);
+                var newRecovered = new NumberFormat("#,###")
+                    .format(snapshot.data?.newRecovered);
+                var totalRecovered = new NumberFormat("#,###")
+                    .format(snapshot.data?.totalRecovered);
                 var date = snapshot.data?.date;
 
                 return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SummaryCardWidget(
-                        icon: Icons.laptop_mac,
-                        value: newConfirmed.toString(),
-                        label: "New Confirmed: "),
-                    SummaryCardWidget(
-                        icon: Icons.laptop_mac,
-                        value: totalConfirmed.toString(),
-                        label: "Total Confirmed:"),
-                    SummaryCardWidget(
-                        icon: Icons.laptop_mac,
-                        value: newDeaths.toString(),
-                        label: "New Deaths: "),
-                    SummaryCardWidget(
-                        icon: Icons.laptop_mac,
-                        value: totalDeaths.toString(),
-                        label: "Total Deaths: "),
-                    SummaryCardWidget(
-                        icon: Icons.laptop_mac,
-                        value: newRecovered.toString(),
-                        label: "New Recovered: "),
-                    SummaryCardWidget(
-                        icon: Icons.laptop_mac,
-                        value: totalRecovered.toString(),
-                        label: "Total Recovered: "),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        SummaryCardWidget(
+                          icon: Icons.healing,
+                          value: newConfirmed.toString(),
+                          label: "New Confirmed",
+                          color: Colors.lightBlue,
+                        ),
+                        SummaryCardWidget(
+                          icon: Icons.healing,
+                          value: totalConfirmed.toString(),
+                          label: "Total Confirmed",
+                          color: Colors.lightBlue,
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        SummaryCardWidget(
+                          icon: Icons.post_add_sharp,
+                          value: newDeaths.toString(),
+                          label: "New Deaths",
+                          color: Colors.redAccent,
+                        ),
+                        SummaryCardWidget(
+                          icon: Icons.post_add_sharp,
+                          value: totalDeaths.toString(),
+                          label: "Total Deaths",
+                          color: Colors.redAccent,
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        SummaryCardWidget(
+                          icon: Icons.check,
+                          value: newRecovered.toString(),
+                          label: "New Recovered",
+                          color: Colors.teal,
+                        ),
+                        SummaryCardWidget(
+                          icon: Icons.check,
+                          value: totalRecovered.toString(),
+                          label: "Total Recovered",
+                          color: Colors.teal,
+                        ),
+                      ],
+                    ),
                   ],
                 );
               } else if (snapshot.hasError) {

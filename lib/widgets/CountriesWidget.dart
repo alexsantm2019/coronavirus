@@ -23,42 +23,23 @@ class _CountriesWidget extends State<CountriesWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(5.0),
       child: Container(
-        //color: Colors.green[200],
         child: FutureBuilder<List<Country>>(
             future: _countriesList,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Country> countries = snapshot.data;
-                return ListView.separated(
+                countries.sort((a, b) => a.country.compareTo(b.country));
+                return ListView.builder(
                   itemCount: countries.length,
-                  separatorBuilder: (BuildContext context, int index) =>
-                      Divider(
-                    color: Colors.orange[200],
-                    indent: 45.0,
-                    endIndent: 25.0,
-                  ),
                   itemBuilder: (BuildContext context, int index) =>
                       CountryCardWidget(
                     country: countries[index],
                     onTap: showDetail,
-                    //onLongPress: markEmailAsRead,
-                    //onSwipe: deleteEmail,
                   ),
-
-                  // itemBuilder: (BuildContext context, int index) {
-                  //   return Container(
-                  //     height: 75,
-                  //     color: Colors.white,
-                  //     child: Center(
-                  //       child: Text(countries[index].country),
-                  //     ),
-                  //   );
-                  // }
                 );
               } else if (snapshot.hasError) {
-                //return Text("No  hay datos");
                 return Text("${snapshot.error}");
               }
               return Center(child: CircularProgressIndicator());
@@ -68,11 +49,13 @@ class _CountriesWidget extends State<CountriesWidget> {
   }
 
   void showDetail(Country country) async {
-    Live _countryInfo;
-    _countryInfo = (await _services.getLiveByCountry(country.slug));
-    print("===> In showDetail 1: $_countryInfo");
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return DetailCountry(countryInfo: _countryInfo);
-    }));
+    await _services.getLiveByCountry(country.slug).then((val) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return DetailCountry(countryInfo: val, country: country);
+      }));
+    }).catchError((error, stackTrace) {
+      // error is SecondError
+      print("outer: $error");
+    });
   }
 }

@@ -21,3 +21,8 @@ const subjectTextStyle = TextStyle(
 const bodyTextStyle = TextStyle(
   fontSize: 15.0,
 );
+
+const cardStatusTitleStyle = TextStyle(fontSize: 18.0, color: Colors.white);
+const cardStatusSubTitleStyle = TextStyle(fontSize: 14.0, color: Colors.white);
+const titleDetailCountryStyle = TextStyle(fontSize: 11.0);
+const titleSplashStyle = TextStyle(color: Colors.white);

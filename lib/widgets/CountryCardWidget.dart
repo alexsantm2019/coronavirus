@@ -20,37 +20,48 @@ class CountryCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var imageCountry = country.ISO2;
     return GestureDetector(
-      onHorizontalDragEnd: (DragEndDetails details) {
-        onSwipe(country.slug);
-      },
       onLongPress: () {
         onLongPress(country.slug);
       },
       onTap: () {
         onTap(country);
       },
-      child: Container(
-        padding: EdgeInsets.all(5.0),
-        height: 70.0,
-        child: Row(
-          children: [
-            Expanded(
-              flex: 8,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ListTile(
-                    leading: Image.network(
-                        "https://www.countryflags.io/$imageCountry/flat/32.png"),
-                    title: Text(country.country, style: fromTextStyle),
-                  ),
-                ],
-              ),
+      child: Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.blue[300], width: 2),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          color: Colors.blue[100],
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Row(
+              //mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Image.network(
+                    "https://www.countryflags.io/$imageCountry/flat/32.png"),
+                SizedBox(width: 30),
+                Text(country.country, style: fromTextStyle),
+                // SizedBox(width: 60),
+                // Icon(
+                //   Icons.remove_red_eye_rounded,
+                //   size: 15,
+                //   color: Colors.white,
+                // )
+                // Align(
+                //   alignment: Alignment.centerRight,
+                //   child: Icon(
+                //     Icons.remove_red_eye_rounded,
+                //     size: 15,
+                //     color: Colors.white,
+                //   ),
+                // )
+                // ,
+              ],
             ),
-          ],
-        ),
-      ),
+          )),
+      //),
     );
   }
 }

@@ -1,39 +1,38 @@
 import 'package:flutter/material.dart';
+import '../constants.dart';
 
-Widget SummaryCardWidget({IconData icon, String value, String label}) {
-  return Card(
-    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+Widget SummaryCardWidget(
+    {IconData icon, String value, String label, Color color}) {
+  return Container(
+      width: 175,
+      height: 120,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white.withAlpha(200),
+      ),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: color, width: 5),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        color: color,
+        elevation: 15,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Row(
-              children: [
-                Icon(
-                  icon,
-                  size: 30.0,
-                ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Text(
-                  label,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
-                Text(
-                  value,
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
-              ],
+            SizedBox(height: 5.0),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Icon(
+                icon,
+                size: 35,
+                color: Colors.white,
+              ),
             ),
-          ]),
-    ),
-  );
+            SizedBox(height: 5.0),
+            Text(label, style: cardStatusTitleStyle),
+            Text(value, style: cardStatusSubTitleStyle),
+          ],
+        ),
+      ));
 }
