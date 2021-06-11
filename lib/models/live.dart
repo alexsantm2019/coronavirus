@@ -34,16 +34,4 @@ class Live {
         active: json['Active'],
         date: json['Date']);
   }
-
-  // Live.fromJson(Map<String, dynamic> json) {
-  //   id = json['ID'];
-  //   country = json['Country'];
-  //   countryCode = json['CountryCode'];
-  //   lat = json['Lat'];
-  //   lon = json['Lon'];
-  //   confirmed = json['Confirmed'];
-  //   deaths = json['Deaths'];
-  //   recovered = json['Recovered'];
-  //   active = json['Active'];
-  // }
 }

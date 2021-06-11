@@ -7,13 +7,13 @@ Widget SummaryCardWidget(
       width: 175,
       height: 120,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(15),
         color: Colors.white.withAlpha(200),
       ),
       child: Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(color: color, width: 5),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
         color: color,
         elevation: 15,

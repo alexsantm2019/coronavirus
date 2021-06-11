@@ -30,17 +30,17 @@ class _SummaryWidget extends State<SummaryWidget> {
             future: _summaryList,
             builder: (context, AsyncSnapshot<Summary> snapshot) {
               if (snapshot.hasData) {
-                var newConfirmed = new NumberFormat("#,###")
-                    .format(snapshot.data?.newConfirmed);
-                var totalConfirmed = new NumberFormat("#,###")
+                var newConfirmed =
+                    NumberFormat.compact().format(snapshot.data?.newConfirmed);
+                var totalConfirmed = new NumberFormat.compact()
                     .format(snapshot.data?.totalConfirmed);
                 var newDeaths =
-                    new NumberFormat("#,###").format(snapshot.data?.newDeaths);
-                var totalDeaths = new NumberFormat("#,###")
+                    new NumberFormat.compact().format(snapshot.data?.newDeaths);
+                var totalDeaths = new NumberFormat.compact()
                     .format(snapshot.data?.totalDeaths);
-                var newRecovered = new NumberFormat("#,###")
+                var newRecovered = new NumberFormat.compact()
                     .format(snapshot.data?.newRecovered);
-                var totalRecovered = new NumberFormat("#,###")
+                var totalRecovered = new NumberFormat.compact()
                     .format(snapshot.data?.totalRecovered);
                 var date = snapshot.data?.date;
 
@@ -53,16 +53,16 @@ class _SummaryWidget extends State<SummaryWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         SummaryCardWidget(
-                          icon: Icons.healing,
+                          icon: Icons.sick_sharp,
                           value: newConfirmed.toString(),
                           label: "New Confirmed",
-                          color: Colors.lightBlue,
+                          color: Colors.yellow[700],
                         ),
                         SummaryCardWidget(
-                          icon: Icons.healing,
+                          icon: Icons.sick_sharp,
                           value: totalConfirmed.toString(),
                           label: "Total Confirmed",
-                          color: Colors.lightBlue,
+                          color: Colors.yellow[700],
                         ),
                       ],
                     ),
@@ -72,13 +72,13 @@ class _SummaryWidget extends State<SummaryWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         SummaryCardWidget(
-                          icon: Icons.post_add_sharp,
+                          icon: Icons.sentiment_very_dissatisfied_rounded,
                           value: newDeaths.toString(),
                           label: "New Deaths",
                           color: Colors.redAccent,
                         ),
                         SummaryCardWidget(
-                          icon: Icons.post_add_sharp,
+                          icon: Icons.sentiment_very_dissatisfied_rounded,
                           value: totalDeaths.toString(),
                           label: "Total Deaths",
                           color: Colors.redAccent,
@@ -91,16 +91,16 @@ class _SummaryWidget extends State<SummaryWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         SummaryCardWidget(
-                          icon: Icons.check,
+                          icon: Icons.sentiment_very_satisfied,
                           value: newRecovered.toString(),
                           label: "New Recovered",
-                          color: Colors.teal,
+                          color: Colors.green[400],
                         ),
                         SummaryCardWidget(
-                          icon: Icons.check,
+                          icon: Icons.sentiment_very_satisfied,
                           value: totalRecovered.toString(),
                           label: "Total Recovered",
-                          color: Colors.teal,
+                          color: Colors.green[400],
                         ),
                       ],
                     ),

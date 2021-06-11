@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:global_coronavirus_info/models/country.dart';
-import 'package:global_coronavirus_info/models/live.dart';
 import 'package:global_coronavirus_info/services/services.dart';
 import 'package:global_coronavirus_info/widgets/CountryCardWidget.dart';
 import 'package:global_coronavirus_info/widgets/DetailCountry.dart';
@@ -50,12 +49,17 @@ class _CountriesWidget extends State<CountriesWidget> {
 
   void showDetail(Country country) async {
     await _services.getLiveByCountry(country.slug).then((val) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return DetailCountry(countryInfo: val, country: country);
-      }));
+      if (val.id != '') {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return DetailCountry(countryInfo: val, country: country);
+        }));
+      }
     }).catchError((error, stackTrace) {
-      // error is SecondError
-      print("outer: $error");
+      final snackBar = SnackBar(
+          content: Text(
+              "Lo sentimos. No existen datos actualizados para este país actualmente. Inténtelo más tarde"));
+      Scaffold.of(context).showSnackBar(snackBar);
+      print("Error: $error");
     });
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:global_coronavirus_info/screens/HomeScreen.dart';
 import 'package:splashscreen/splashscreen.dart';
-// import '../conf/configuration.dart';
 import '../constants.dart';
 
 class Splash extends StatelessWidget {
@@ -16,7 +15,6 @@ class Splash extends StatelessWidget {
         style: titleSplashStyle,
         textScaleFactor: 2,
       ),
-      //image: new Image.network(PATH_IMAGE_SPLASH),
       image: Image(
         image: AssetImage('images/coronavirus.gif'),
       ),

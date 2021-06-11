@@ -41,12 +41,13 @@ class Services {
         'https://api.covid19api.com/live/country/$country/status/confirmed/date/$dateSearch';
     try {
       final response = await http.get(Uri.parse(urlByCountry));
-      var parsedJson = json.decode(response.body).last;
-      final arraySend = Live.fromJson(parsedJson);
-      return arraySend;
+      if (response.body.length > 0) {
+        var parsedJson = json.decode(response.body).last;
+        return Live.fromJson(parsedJson);
+      }
     } catch (e) {
-      print(e.toString());
-      rethrow;
+      print('Error: $e');
+      //rethrow;
     }
   }
 }

@@ -43,21 +43,6 @@ class CountryCardWidget extends StatelessWidget {
                     "https://www.countryflags.io/$imageCountry/flat/32.png"),
                 SizedBox(width: 30),
                 Text(country.country, style: fromTextStyle),
-                // SizedBox(width: 60),
-                // Icon(
-                //   Icons.remove_red_eye_rounded,
-                //   size: 15,
-                //   color: Colors.white,
-                // )
-                // Align(
-                //   alignment: Alignment.centerRight,
-                //   child: Icon(
-                //     Icons.remove_red_eye_rounded,
-                //     size: 15,
-                //     color: Colors.white,
-                //   ),
-                // )
-                // ,
               ],
             ),
           )),

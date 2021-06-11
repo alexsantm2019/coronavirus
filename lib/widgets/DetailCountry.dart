@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:global_coronavirus_info/models/live.dart';
 import 'package:global_coronavirus_info/widgets/MapWidget.dart';
+import 'package:global_coronavirus_info/screens/ErrorScreen.dart';
 import '../constants.dart';
 import 'package:global_coronavirus_info/models/country.dart';
-import 'package:latlong/latlong.dart';
-import 'package:flutter_map/flutter_map.dart';
 
 class DetailCountry extends StatelessWidget {
   final Live countryInfo;
@@ -15,7 +14,8 @@ class DetailCountry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var imageCountry = country.ISO2;
-    return Scaffold(
+    if (countryInfo != null)
+      return Scaffold(
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -23,14 +23,15 @@ class DetailCountry extends StatelessWidget {
               Image.network(
                   "https://www.countryflags.io/$imageCountry/flat/32.png"),
               Container(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(5.0),
                   child:
                       Text(countryInfo.country, style: titleDetailCountryStyle))
             ],
           ),
           backgroundColor: Colors.indigo[200],
         ),
-        body: Column(
+        body: SingleChildScrollView(
+            child: Column(
           children: <Widget>[
             SizedBox(height: 10.0),
             Row(
@@ -54,18 +55,21 @@ class DetailCountry extends StatelessWidget {
                     title: "Deaths"),
               ],
             ),
-            SizedBox(height: 15.0),
+            SizedBox(height: 10.0),
             Container(
-              width: 600,
-              height: 400,
+              width: 610,
+              height: 450,
               constraints: BoxConstraints(maxWidth: 400),
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(5),
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
               child: MapWidget(countryInfo: countryInfo),
             ),
           ],
-        ));
+        )),
+      );
+    else
+      return ErrorScreen();
   }
 
   Widget StatusInfoBox({textValue, IconData icon, Color color, String title}) {
