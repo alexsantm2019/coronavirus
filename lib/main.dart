@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:global_coronavirus_info/screens/HomeScreen.dart';
 import 'package:global_coronavirus_info/screens/SplashScreen.dart';
 
 void main() {
