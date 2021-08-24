@@ -1,6 +1,6 @@
 # global_coronavirus_info
 
-A new Flutter project.
+App para mostrar información mundial de los datos de contagiados de coronavirus. Construido en flutter
 
 ## Getting Started
 
